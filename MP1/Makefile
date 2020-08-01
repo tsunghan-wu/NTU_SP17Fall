@@ -1,4 +1,24 @@
-loser:loser.cpp list_file.cpp list_file.h md5.cpp
-	g++ loser.cpp list_file.cpp md5.cpp -lcrypto -lssl -g -o loser
+# define variables
+CXX = g++
+LIBS = -lcrypto -lssl
+
+RM = rm
+RMFLAGS = -f
+
+TARGET = loser
+OBJECTS = loser.o list_file.o md5.o
+
+# PHONY
+.PHONY: all clean
+# rules
+all: $(TARGET)
+
+$(TARGET): loser.o list_file.o md5.o
+	$(CXX) -o $@ $^ $(LIBS)
+
+.SUFFIX: .o .cpp
+.cpp.o:
+	$(CXX) -c $<
+
 clean:
-	rm -rf loser
+	$(RM) $(RMFLAGS) $(TARGET) $(OBJECTS)
