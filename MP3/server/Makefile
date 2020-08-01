@@ -1,15 +1,20 @@
 .PHONY: all clean
 
-# compiler name
-CC=g++
+CXX = g++
+CFLAGS = -Wall
 
-# place options like -O2, -g here
-export CFLAGS=-lssl -lcrypto -Wall
+TARGET = boss
+OBJS = boss.o
+LIBS = -lssl -lcrypto
 
-all: boss
+all: $(TARGET)
 
-boss: boss.cpp boss.h 
-	$(CC) -o boss $(CFLAGS) boss.cpp 
+$(TARGET): $(OBJS)
+	$(CXX) -o $@ $(OBJS) $(LIBS)
+
+.SUFFIXES: .o .cpp
+.cpp.o:
+	$(CXX) $(CFLAGS) -c $<
 
 clean:
-	rm -f boss
+	rm -f $(TARGET) $(OBJS)

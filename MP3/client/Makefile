@@ -1,15 +1,25 @@
 .PHONY: all clean
 
-# compiler name
-CC=g++
+CXX = g++
+CFLAGS = -Wall -std=c++11
 
-# place options like -O2, -g here
-CFLAGS=-lssl -lcrypto -Wall
+RM = rm
+RMFLAGS = -f
 
-all: miner
+TARGET = miner
+OBJECT = miner.o
+LIBS = -lssl -lcrypto
 
-miner: miner.cpp miner.h
-	$(CC) -o miner $(CFLAGS) miner.cpp 
+all: $(TARGET)
+
+$(TARGET): $(OBJECT)
+	@echo "Making $@"
+	@$(CXX) $(CFLAGS) -o $@ $(OBJECT) $(LIBS)
+
+.SUFFIXES: .o .cpp
+.cpp.o:
+	@echo "Making $@"
+	@$(CXX) $(CFLAGS) -c $<
 
 clean:
-	rm -f miner
+	$(RM) $(RMFLAGS) $(TARGET) $(OBJECT)

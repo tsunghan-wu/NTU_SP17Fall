@@ -14,11 +14,13 @@ OBJECTS = loser.o list_file.o md5.o
 all: $(TARGET)
 
 $(TARGET): loser.o list_file.o md5.o
-	$(CXX) -o $@ $^ $(LIBS)
+	@echo "Making $@"
+	@$(CXX) -o $@ $^ $(LIBS)
 
 .SUFFIX: .o .cpp
 .cpp.o:
-	$(CXX) -c $<
+	@echo "Making $@"
+	@$(CXX) -c $<
 
 clean:
 	$(RM) $(RMFLAGS) $(TARGET) $(OBJECTS)
