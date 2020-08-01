@@ -16,8 +16,7 @@ $(TARGET): $(OBJECT)
 	@echo "Making $@"
 	@$(CXX) $(CFLAGS) -o $@ $(OBJECT) $(LIBS)
 
-.SUFFIXES: .o .cpp
-.cpp.o:
+%.o: %.cpp
 	@echo "Making $@"
 	@$(CXX) $(CFLAGS) -c $<
 

@@ -12,8 +12,9 @@ all: $(TARGET)
 $(TARGET): $(OBJS)
 	$(CXX) -o $@ $(OBJS) $(LIBS)
 
-.SUFFIXES: .o .cpp
-.cpp.o:
+#.SUFFIXES: .o .cpp
+#.cpp.o:
+%.o: %.cpp
 	$(CXX) $(CFLAGS) -c $<
 
 clean:

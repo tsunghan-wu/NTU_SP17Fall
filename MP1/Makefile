@@ -17,8 +17,7 @@ $(TARGET): loser.o list_file.o md5.o
 	@echo "Making $@"
 	@$(CXX) -o $@ $^ $(LIBS)
 
-.SUFFIX: .o .cpp
-.cpp.o:
+%.o: %.cpp
 	@echo "Making $@"
 	@$(CXX) -c $<
 
